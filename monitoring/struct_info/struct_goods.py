@@ -54,8 +54,40 @@ class PinDuoDuoGoodsSold:
     def __init__(self, goods_title, sold_num):
         """
 
-        :param goods_name: 商品标题
+        :param goods_title: 商品标题
         :param sold_num:
         """
         self.goods_title = goods_title
         self.sold_num = sold_num
+
+
+class PinDuoDuoGoodsCommentTag:
+    """
+    商品评价标签
+    """
+    __slots__ = ['tag_name', 'tag_num']
+
+    def __init__(self, tag_name, tag_num):
+        """
+
+        :param tag_name: 标签名
+        :param tag_num: 标签出现次数
+        """
+        self.tag_num = tag_num
+        self.tag_name = tag_name
+
+
+class PinDuoDuoGoodsCommentTagInfo:
+    """
+    商品评价标签信息
+    """
+    __slots__ = ["goods_title", "goods_tag"]
+
+    def __init__(self, goods_title, goods_tag: List[PinDuoDuoGoodsCommentTag]):
+        """
+
+        :param goods_title: 商品标题
+        :param goods_tag: 商品评价标签集合
+        """
+        self.goods_title = goods_title
+        self.goods_tag = goods_tag
