@@ -10,12 +10,23 @@ from company.celeryconfig import app
 
 
 class PinDuoDuo:
+    instance_flag = False
+    instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls.instance is None:
+            cls.instance = super().__new__(cls)
+        return cls.instance
+
     def __init__(self):
-        self.headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 7.0; PLUS Build/NRD90M) '
-                          'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36',
-            'cookie': 'api_uid=CiFjZV2M4NNHKgBOSSKEAg==; _nano_fp=XpdjlpdaXqEJX5XbnT_fqLjtzH6S6NeyVD6RVRC3; msec=1800000; rec_list_mall_bottom=rec_list_mall_bottom_5bFnZV; group_rec_list=group_rec_list_a44iQA; chat_list_rec_list=chat_list_rec_list_wZlIVR; JSESSIONID=139FC4FD1CDC6870479ACD0FAA7380E7; rec_list_index=rec_list_index_tKLrfv; rec_list_personal=rec_list_personal_bvwjjk; rec_list_footprint=rec_list_footprint_r4ql3m; pdd_user_id=7535527805049; pdd_user_uin=LN35OVQXEXJDDBR6O64BVPY7R4_GEXDA; PDDAccessToken=VCZTQ4A3423C52UTRKTJA5K2HTORQDX6V3AGSDVFW7FERQ3WCUOA110798f; ua=Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_12_6)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F77.0.3865.90%20Safari%2F537.36; webp=1'
-        }
+        if not PinDuoDuo.instance_flag:
+            print("init")
+            self.headers = {
+                'user-agent': 'Mozilla/5.0 (Linux; Android 7.0; PLUS Build/NRD90M) '
+                              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36',
+                'cookie': 'api_uid=CiFjZV2M4NNHKgBOSSKEAg==; _nano_fp=XpdjlpdaXqEJX5XbnT_fqLjtzH6S6NeyVD6RVRC3; msec=1800000; rec_list_mall_bottom=rec_list_mall_bottom_5bFnZV; group_rec_list=group_rec_list_a44iQA; chat_list_rec_list=chat_list_rec_list_wZlIVR; JSESSIONID=139FC4FD1CDC6870479ACD0FAA7380E7; rec_list_index=rec_list_index_tKLrfv; rec_list_personal=rec_list_personal_bvwjjk; rec_list_footprint=rec_list_footprint_r4ql3m; pdd_user_id=7535527805049; pdd_user_uin=LN35OVQXEXJDDBR6O64BVPY7R4_GEXDA; PDDAccessToken=VCZTQ4A3423C52UTRKTJA5K2HTORQDX6V3AGSDVFW7FERQ3WCUOA110798f; ua=Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_12_6)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F77.0.3865.90%20Safari%2F537.36; webp=1'
+            }
+            PinDuoDuo.instance_flag = True
 
     @app.task(queue='PinDuoDuo')
     def get_goods_sold_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsSold]:
