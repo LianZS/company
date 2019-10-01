@@ -22,9 +22,9 @@ CELERYD_CONCURRENCY = 10  # 设置并发的worker数量
 
 CELERYD_MAX_TASKS_PER_CHILD = 1  # 每个worker最多执行1个任务被销毁，可以防止内存泄漏
 CELERY_TASK_ACKS_LATE = True  # 允许重试
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_ACCEPT_CONTENT = ['application/x-python-serialize']
+CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERY_ENABLE_UTC = True
 app = Celery("celery")
