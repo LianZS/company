@@ -3,9 +3,9 @@ import re
 import json
 from typing import Union
 from bs4 import BeautifulSoup
-from monitoring.struct_info.struct_goods import PinDuoDuoGood, PinDuoDuoGoodsInfo, PinDuoDuoGoodsSold, \
+from monitoring.struct_info.struct_goods import PinDuoDuoGoodsType, PinDuoDuoGoodsTypesInfo, PinDuoDuoGoodsSold, \
     PinDuoDuoGoodsCommentTag, PinDuoDuoGoodsCommentTagInfo, PinDuoDuoGoodsCharacteristic, \
-    PinDuoDuoGoodsCharacteristicsInfo
+    PinDuoDuoGoodsCharacteristicsInfo, PinDuoDuoGoodsSummaryInfo
 from company.celeryconfig import app
 
 
@@ -52,9 +52,9 @@ class PinDuoDuo:
         return PinDuoDuoGoodsSold(goods_title, sold_num)
 
     @app.task(queue="PinDuoDuo")
-    def get_goods_info_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsInfo]:
+    def get_goods_type_info_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsTypesInfo]:
         """
-        获取链接商品信息，商品名称，已买商品数，商品款式，价格
+        获取链接商品信息---商品款式与价格
 
         :param goods_url: 商品链接
         :return:
@@ -80,9 +80,9 @@ class PinDuoDuo:
                     goods_size = spec_value  # 商品尺寸
             normal_price = goods['normalPrice']  # 单独购买价格
             group_price = goods['groupPrice']  # 发起拼单价格
-            goods = PinDuoDuoGood(goods_name, goods_size, normal_price, group_price)
+            goods = PinDuoDuoGoodsType(goods_name, goods_size, normal_price, group_price)
             goods_info_list.append(goods)
-        return PinDuoDuoGoodsInfo(goods_title, goods_info_list)
+        return PinDuoDuoGoodsTypesInfo(goods_title, goods_info_list)
 
     @app.task(queue="PinDuoDuo")
     def get_goods_comments_tag_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsCommentTagInfo]:
@@ -110,7 +110,7 @@ class PinDuoDuo:
     @app.task(queue="PinDuoDuo")
     def get_goods_baseinfo_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsCharacteristicsInfo]:
         """
-        商品基本信息提取
+        商品特征信息提取
         :param goods_url: 商品链接
         :return:
         """
@@ -128,3 +128,64 @@ class PinDuoDuo:
             goods_characteristics_list.append(
                 PinDuoDuoGoodsCharacteristic(characteristics_type, characteristics_content))
         return PinDuoDuoGoodsCharacteristicsInfo(goods_title, goods_characteristics_list)
+
+    @app.task(queue="PinDuoDuo")
+    def get_goods_all_info_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsSummaryInfo]:
+        """
+        获取商品所有信息
+        :param goods_url: 商品链接
+        :return:
+        """
+        response = requests.get(url=goods_url, headers=self.headers, timeout=5)
+        if response.status_code != 200:
+            return None
+        # 提取链接商品全部信息
+        goods_info = re.search("rawData=\s(.*?);\s+</script>", response.text).group(1)  # 拥有商品所有信息
+        goods_info_dict: dict = json.loads(goods_info)
+        goods_base_info = goods_info_dict['store']['initDataObj']['goods']  # 提取需要的商品信息
+        goods_title = goods_base_info['goodsName']  # 商品标题
+        soup = BeautifulSoup(response.text, 'lxml')
+        # 获取已售件数----获取得：已拼n件
+        try:
+            sold = soup.find(name='span', attrs={"class": '_3ORJYJDV'}).text  # 获取已售件数----获取得：已拼n件
+            # 提取到此时售卖数
+            sold_num = re.match("\w{2}(\d+)", sold).group(1)
+            # 商品标题
+            goods_title = soup.find(name="span", attrs={"class": "enable-select"}).text  # 商品标题
+        except AttributeError as e:
+            print(e)
+            return None
+        goods_sold_info = PinDuoDuoGoodsSold(goods_title, sold_num)
+        goods_info_list = list()  # 存放商品类型的基本信息
+        for goods in goods_base_info['skus']:
+            goods_name, goods_size = None, None
+            for goods_struct in goods['specs']:
+                spec_key = goods_struct['spec_key']
+                spec_value = goods_struct['spec_value']
+                if spec_key == "型号":
+                    goods_name = spec_value  # 商品名称
+
+                if spec_key == "尺寸":
+                    goods_size = spec_value  # 商品尺寸
+            normal_price = goods['normalPrice']  # 单独购买价格
+            group_price = goods['groupPrice']  # 发起拼单价格
+            goods = PinDuoDuoGoodsType(goods_name, goods_size, normal_price, group_price)
+            goods_info_list.append(goods)
+        goods_type_info = PinDuoDuoGoodsTypesInfo(goods_title, goods_info_list)
+        tag_list = goods_base_info['review']['tagList']
+        goods_tag_list = list()
+        for item in tag_list:
+            tag_text = item['text']  # 标签文本,包含了关键词和次数
+            tag_name = re.match("(\w+)", tag_text).group(1)  # 关键词
+            tag_num = re.match("\w+\((\d+)\)", tag_text).group(1)  # 出现次数
+            goods_tag_list.append(PinDuoDuoGoodsCommentTag(tag_name, tag_num))
+        goods_tag_info = PinDuoDuoGoodsCommentTagInfo(goods_title, goods_tag_list)
+        goods_characteristics_list = list()
+        for item in goods_base_info['goodsProperty']:
+            characteristics_type = item['key']
+            characteristics_content = item['values']
+            goods_characteristics_list.append(
+                PinDuoDuoGoodsCharacteristic(characteristics_type, characteristics_content))
+        goods_characteristic_info = PinDuoDuoGoodsCharacteristicsInfo(goods_title, goods_characteristics_list)
+        return PinDuoDuoGoodsSummaryInfo(goods_title, goods_type_info, goods_tag_info, goods_characteristic_info,
+                                         goods_sold_info)
