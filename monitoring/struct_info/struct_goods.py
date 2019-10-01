@@ -2,6 +2,9 @@ from typing import List
 
 
 class PinDuoDuoGood:
+    """
+    商品类型基本信息
+    """
     __slots__ = ["goods_name", "goods_size", "normal_price", "group_price"]
 
     def __init__(self, goods_name, goods_size, normal_price, group_price):
@@ -24,6 +27,9 @@ class PinDuoDuoGood:
 
 
 class PinDuoDuoGoodsInfo:
+    """
+    商品的所有类型信息
+    """
     __slots__ = ["goods_title", "goods_info"]
 
     def __init__(self, goods_title, goods_info: List[PinDuoDuoGood]):
@@ -37,3 +43,19 @@ class PinDuoDuoGoodsInfo:
 
     def __str__(self):
         return "商品标题:{goods_title}".format(goods_title=self.goods_title)
+
+
+class PinDuoDuoGoodsSold:
+    """
+    商品售卖数
+    """
+    __slots__ = ['goods_title', 'sold_num']
+
+    def __init__(self, goods_title, sold_num):
+        """
+
+        :param goods_name: 商品标题
+        :param sold_num:
+        """
+        self.goods_title = goods_title
+        self.sold_num = sold_num
