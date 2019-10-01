@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 
-class PinDuoDuoGood:
+class PinDuoDuoGoodsType:
     """
     商品类型基本信息
     """
@@ -26,20 +26,20 @@ class PinDuoDuoGood:
             group_price=self.group_price)
 
 
-class PinDuoDuoGoodsInfo:
+class PinDuoDuoGoodsTypesInfo:
     """
     商品的所有类型信息
     """
-    __slots__ = ["goods_title", "goods_info"]
+    __slots__ = ["goods_title", "goods_type_info"]
 
-    def __init__(self, goods_title, goods_info: List[PinDuoDuoGood]):
+    def __init__(self, goods_title, goods_info: List[PinDuoDuoGoodsType]):
         """
 
         :param goods_title: 商品标题
         :param goods_info:商品类型的信息
         """
         self.goods_title = goods_title
-        self.goods_info = goods_info
+        self.goods_type_info = goods_info
 
     def __str__(self):
         return "商品标题:{goods_title}".format(goods_title=self.goods_title)
@@ -136,3 +136,5 @@ class PinDuoDuoGoodsCharacteristicsInfo:
     def __str__(self):
         return "商品标题:{goods_title},商品特征:{goods_characteristics}".format(goods_title=self.goods_title,
                                                                         goods_characteristics=self.goods_characteristics)
+
+
