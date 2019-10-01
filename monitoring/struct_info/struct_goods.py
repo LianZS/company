@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 
 
 class PinDuoDuoGoodsType:
@@ -138,3 +138,29 @@ class PinDuoDuoGoodsCharacteristicsInfo:
                                                                         goods_characteristics=self.goods_characteristics)
 
 
+class PinDuoDuoGoodsSummaryInfo:
+    """
+    商品信息汇总
+    """
+    __slots__ = ["goods_title", "goods_type_info", "goods_tag_info", "goods_charateristics", "goods_sold_info"]
+
+    def __init__(self, goods_title, goods_type_info, goods_tag_info, goods_charateristics, goods_sold_info):
+        """
+        :param goods_title:商品标题
+        :param goods_type_info:商品类型信息
+        :param goods_tag_info:商品评价标签信息
+        :param goods_charateristics:商品特征信息
+        :param goods_sold_info:商品售卖数
+        """
+        self.goods_title = goods_title
+        self.goods_type_info = goods_type_info
+        self.goods_tag_info = goods_tag_info
+        self.goods_charateristics = goods_charateristics
+        self.goods_sold_info = goods_sold_info
+
+    def __str__(self):
+        return "商品标题：{goods_title},商品类型信息:{goods_type_info},商品评价标签信息:{goods_tag_info},商品特征信息:{goods_charateristics}," \
+               "商品售卖数:{goods_sold_info}".format(goods_title=self.goods_title, goods_type_info=self.goods_type_info,
+                                                goods_tag_info=self.goods_tag_info,
+                                                goods_charateristics=self.goods_charateristics,
+                                                goods_sold_info=self.goods_sold_info)
