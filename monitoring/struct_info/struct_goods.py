@@ -164,5 +164,5 @@ class PinDuoDuoGoodsSummaryInfo:
         return "商品标题：{goods_title},商品类型信息:{goods_type_info},商品评价标签信息:{goods_tag_info},商品特征信息:{goods_charateristics}," \
                "商品售卖数:{goods_sold_info}".format(goods_title=self.goods_title, goods_type_info=self.goods_type_info,
                                                 goods_tag_info=self.goods_tag_info,
-                                                goods_charateristics=self.goods_charateristics,
+                                                goods_charateristics=self.goods_charateristics_info,
                                                 goods_sold_info=self.goods_sold_info)
