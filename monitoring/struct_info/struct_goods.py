@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 
 class PinDuoDuoGood:
@@ -55,10 +55,13 @@ class PinDuoDuoGoodsSold:
         """
 
         :param goods_title: 商品标题
-        :param sold_num:
+        :param sold_num:已售数量
         """
         self.goods_title = goods_title
         self.sold_num = sold_num
+
+    def __str__(self):
+        return "商品标题:{goods_title},已售数量：{sold_num}".format(goods_title=self.goods_title, sold_num=self.sold_num)
 
 
 class PinDuoDuoGoodsCommentTag:
@@ -76,6 +79,9 @@ class PinDuoDuoGoodsCommentTag:
         self.tag_num = tag_num
         self.tag_name = tag_name
 
+    def __str__(self):
+        return "标签名：{tag_name}，标签出现次数：{tag_num}".format(tag_name=self.tag_name, tag_num=self.tag_num)
+
 
 class PinDuoDuoGoodsCommentTagInfo:
     """
@@ -91,3 +97,42 @@ class PinDuoDuoGoodsCommentTagInfo:
         """
         self.goods_title = goods_title
         self.goods_tag = goods_tag
+
+    def __str__(self):
+        return "商品标题:{goods_title}".format(goods_title=self.goods_title)
+
+
+class PinDuoDuoGoodsCharacteristic:
+    """
+    商品某项特征
+    """
+    __slots__ = ['characteristic_type', 'characteristic_content']
+
+    def __init__(self, characteristic_type, characteristic_content):
+        """
+
+        :param characteristic_type: 特征类型
+        :param characteristic_content: 特征详情
+        """
+        self.characteristic_type = characteristic_type
+        self.characteristic_content = characteristic_content
+
+
+class PinDuoDuoGoodsCharacteristicsInfo:
+    """
+     商品特征信息
+    """
+    __slots__ = ['goods_title', 'goods_characteristics']
+
+    def __init__(self, goods_title, goods_characteristics: List[PinDuoDuoGoodsCharacteristic]):
+        """
+
+        :param goods_title: 商品标题
+        :param goods_characteristics: 商品特征集合
+        """
+        self.goods_title = goods_title
+        self.goods_characteristics = goods_characteristics
+
+    def __str__(self):
+        return "商品标题:{goods_title},商品特征:{goods_characteristics}".format(goods_title=self.goods_title,
+                                                                        goods_characteristics=self.goods_characteristics)
