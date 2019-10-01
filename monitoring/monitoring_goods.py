@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from monitoring.struct_info.struct_goods import PinDuoDuoGood, PinDuoDuoGoodsInfo, PinDuoDuoGoodsSold, \
     PinDuoDuoGoodsCommentTag, PinDuoDuoGoodsCommentTagInfo, PinDuoDuoGoodsCharacteristic, \
     PinDuoDuoGoodsCharacteristicsInfo
-from company.celeryconfig import app
 
 
 class PinDuoDuo:
@@ -20,7 +19,6 @@ class PinDuoDuo:
 
     def __init__(self):
         if not PinDuoDuo.instance_flag:
-            print("init")
             self.headers = {
                 'user-agent': 'Mozilla/5.0 (Linux; Android 7.0; PLUS Build/NRD90M) '
                               'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36',
@@ -28,13 +26,13 @@ class PinDuoDuo:
             }
             PinDuoDuo.instance_flag = True
 
-    @app.task(queue='PinDuoDuo')
     def get_goods_sold_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsSold]:
         """
         获取链接中商品标题和已买商品数
         :param goods_url:商品链接
         :return:
         """
+
         response = requests.get(url=goods_url, headers=self.headers)
         if response.status_code != 200:
             return None
@@ -52,7 +50,6 @@ class PinDuoDuo:
 
         return PinDuoDuoGoodsSold(goods_title, sold_num)
 
-    @app.task(queue='PinDuoDuo')
     def get_goods_info_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsInfo]:
         """
         获取链接商品信息，商品名称，已买商品数，商品款式，价格
@@ -85,7 +82,6 @@ class PinDuoDuo:
             goods_info_list.append(goods)
         return PinDuoDuoGoodsInfo(goods_title, goods_info_list)
 
-    @app.task(queue='PinDuoDuo')
     def get_goods_comments_tag_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsCommentTagInfo]:
         """
         获取商品评价关键词及频率
@@ -108,7 +104,6 @@ class PinDuoDuo:
             goods_tag_list.append(PinDuoDuoGoodsCommentTag(tag_name, tag_num))
         return PinDuoDuoGoodsCommentTagInfo(goods_title, goods_tag_list)
 
-    @app.task(queue='PinDuoDuo')
     def get_goods_baseinfo_by_url(self, goods_url) -> Union[None, PinDuoDuoGoodsCharacteristicsInfo]:
         """
         商品基本信息提取
