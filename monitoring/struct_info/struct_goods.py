@@ -117,6 +117,10 @@ class PinDuoDuoGoodsCharacteristic:
         self.characteristic_type = characteristic_type
         self.characteristic_content = characteristic_content
 
+    def __str__(self):
+        return "特征类型:{characteristic_type},characteristic_content:{characteristic_content}".format(
+            characteristic_type=self.characteristic_type, characteristic_content=self.characteristic_content)
+
 
 class PinDuoDuoGoodsCharacteristicsInfo:
     """
