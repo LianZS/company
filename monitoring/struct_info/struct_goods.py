@@ -146,18 +146,23 @@ class PinDuoDuoGoodsSummaryInfo:
     """
     商品信息汇总
     """
-    __slots__ = ["goods_title", "goods_type_info", "goods_tag_info", "goods_charateristics_info", "goods_sold_info"]
+    __slots__ = ["shops", "shops_url", "goods_title", "goods_type_info", "goods_tag_info", "goods_charateristics_info",
+                 "goods_sold_info"]
 
-    def __init__(self, goods_title: str, goods_type_info: PinDuoDuoGoodsTypesInfo,
+    def __init__(self, shops, shops_url, goods_title: str, goods_type_info: PinDuoDuoGoodsTypesInfo,
                  goods_tag_info: PinDuoDuoGoodsCommentTagInfo,
                  goods_charateristics_info: PinDuoDuoGoodsCharacteristicsInfo, goods_sold_info: PinDuoDuoGoodsSold):
         """
+        :param shops:店铺名
+        :param shops_url:店铺链接
         :param goods_title:商品标题
         :param goods_type_info:商品类型信息
         :param goods_tag_info:商品评价标签信息
         :param goods_charateristics_info:商品特征信息
         :param goods_sold_info:商品售卖数
         """
+        self.shops = shops
+        self.shops_url = shops_url
         self.goods_title = goods_title
         self.goods_type_info = goods_type_info
         self.goods_tag_info = goods_tag_info
@@ -165,8 +170,48 @@ class PinDuoDuoGoodsSummaryInfo:
         self.goods_sold_info = goods_sold_info
 
     def __str__(self):
-        return "商品标题：{goods_title},商品类型信息:{goods_type_info},商品评价标签信息:{goods_tag_info},商品特征信息:{goods_charateristics}," \
-               "商品售卖数:{goods_sold_info}".format(goods_title=self.goods_title, goods_type_info=self.goods_type_info,
+        return "店铺：{shops},商品标题：{goods_title},商品类型信息:{goods_type_info},商品评价标签信息:{goods_tag_info},商品特征信息:{goods_charateristics}," \
+               "商品售卖数:{goods_sold_info}".format(shops=self.shops, goods_title=self.goods_title,
+                                                goods_type_info=self.goods_type_info,
                                                 goods_tag_info=self.goods_tag_info,
                                                 goods_charateristics=self.goods_charateristics_info,
                                                 goods_sold_info=self.goods_sold_info)
+
+
+class PinDuoDuoShopsGoodsInfo:
+    """
+    商品链接信息
+    """
+    __slots__ = ["goods_title", "goods_url"]
+
+    def __init__(self, goods_title, goods_url):
+        """
+
+        :param goods_title: 商品标题
+        :param goods_url: 商品链接
+        """
+        self.goods_title = goods_title
+        self.goods_url = goods_url
+
+    def __str__(self):
+        return "商品标题:{goods_title},商品链接:{goods_url}".format(goods_title=self.goods_title, goods_url=self.goods_url)
+
+
+class PinDuoDuoShops:
+    """
+    店铺商品信息概况
+    """
+    __slots__ = ["shops", "shops_url", "shops_goods_info"]
+
+    def __init__(self, shops: str, shops_url, shops_goods_info: List[PinDuoDuoShopsGoodsInfo]):
+        """
+        :param shops_url:店铺链接
+        :param shops: 店铺
+        :param shops_goods_info:商品信息
+        """
+        self.shops = shops
+        self.shops_url = shops_url
+        self.shops_goods_info = shops_goods_info
+
+    def __str__(self):
+        return "店铺:{shops},店铺链接:{shops_url}".format(shops=self.shops, shops_url=self.shops_url)
