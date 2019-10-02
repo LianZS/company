@@ -143,6 +143,8 @@ class PinDuoDuo:
         goods_info = re.search("rawData=\s(.*?);\s+</script>", response.text).group(1)  # 拥有商品所有信息
         goods_info_dict: dict = json.loads(goods_info)
         goods_base_info = goods_info_dict['store']['initDataObj']['goods']  # 提取需要的商品信息
+        shops_url = goods_info_dict['store']['initDataObj']['mall']['pddRoute']  # 店铺链接
+        complete_shops_url = "https://mobile.yangkeduo.com/" + shops_url  # 完整店铺链接
         goods_title = goods_base_info['goodsName']  # 商品标题
         soup = BeautifulSoup(response.text, 'lxml')
         # 获取已售件数----获取得：已拼n件
@@ -150,11 +152,10 @@ class PinDuoDuo:
             sold = soup.find(name='span', attrs={"class": '_3ORJYJDV'}).text  # 获取已售件数----获取得：已拼n件
             # 提取到此时售卖数
             sold_num = re.match("\w{2}(\d+)", sold).group(1)
-            # 商品标题
-            goods_title = soup.find(name="span", attrs={"class": "enable-select"}).text  # 商品标题
         except AttributeError as e:
             print(e)
             return None
+        shops = soup.find(name='div', attrs={"class": "XDgqxbX_"}).text  # 商铺名
         goods_sold_info = PinDuoDuoGoodsSold(goods_title, sold_num)
         goods_info_list = list()  # 存放商品类型的基本信息
         for goods in goods_base_info['skus']:
@@ -187,5 +188,15 @@ class PinDuoDuo:
             goods_characteristics_list.append(
                 PinDuoDuoGoodsCharacteristic(characteristics_type, characteristics_content))
         goods_characteristic_info = PinDuoDuoGoodsCharacteristicsInfo(goods_title, goods_characteristics_list)
-        return PinDuoDuoGoodsSummaryInfo(goods_title, goods_type_info, goods_tag_info, goods_characteristic_info,
+        return PinDuoDuoGoodsSummaryInfo(shops, complete_shops_url, goods_title, goods_type_info, goods_tag_info,
+                                         goods_characteristic_info,
                                          goods_sold_info)
+
+    def monitoring_goods_all_info(self, url):
+        """
+        长期监控商品信息
+        :param url: 商品链接
+        :return:
+        """
+        # 任务信息先写入数据库
+
