@@ -42,6 +42,8 @@ def get_monitoring_pinduoduo_goods_info(request):
             pass
         else:
             summary_info: PinDuoDuoGoodsSummaryInfo = app.AsyncResult(task_id).result
+            shops = summary_info.shops  # 店铺
+            shops_url = summary_info.shops_url  # 店铺链接
             goods_title = summary_info.goods_title  # 商品标题
             goods_sold = summary_info.goods_sold_info.sold_num  # 售卖数量
 
@@ -69,6 +71,8 @@ def get_monitoring_pinduoduo_goods_info(request):
                 goods_type_dict['normal_price'] = goods_type.normal_price  # 发起拼单价格
                 goods_types_list.append(goods_type_dict)
             task_result = {
+                'shops': shops,
+                'shops_url': shops_url,
                 "title": goods_title,
                 "sold": goods_sold,
                 "tags": goods_tags_list,
