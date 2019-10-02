@@ -1,6 +1,8 @@
 from django.urls import path, include
-from .views import monitoring_pinduoduo_goods_by_url
+from .views import request_pinduoduo_goods_by_url,get_monitoring_pinduoduo_goods_info
 
 urlpatterns = [
-    path("sendPinduoduoUrl", monitoring_pinduoduo_goods_by_url),
+    path("sendPinduoduoGoodsUrl", request_pinduoduo_goods_by_url),
+    path("getPinduoduoGoodsInfo", get_monitoring_pinduoduo_goods_info),
+
 ]
