@@ -5,7 +5,7 @@ from typing import Union
 from bs4 import BeautifulSoup
 from monitoring.struct_info.struct_goods import PinDuoDuoGoodsType, PinDuoDuoGoodsTypesInfo, PinDuoDuoGoodsSold, \
     PinDuoDuoGoodsCommentTag, PinDuoDuoGoodsCommentTagInfo, PinDuoDuoGoodsCharacteristic, \
-    PinDuoDuoGoodsCharacteristicsInfo, PinDuoDuoGoodsSummaryInfo
+    PinDuoDuoGoodsCharacteristicsInfo, PinDuoDuoGoodsSummaryInfo, PinDuoDuoShopsGoodsInfo, PinDuoDuoShops
 from company.celeryconfig import app
 
 
@@ -192,11 +192,5 @@ class PinDuoDuo:
                                          goods_characteristic_info,
                                          goods_sold_info)
 
-    def monitoring_goods_all_info(self, url):
-        """
-        长期监控商品信息
-        :param url: 商品链接
-        :return:
-        """
-        # 任务信息先写入数据库
+
 
