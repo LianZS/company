@@ -8,19 +8,18 @@ from .struct_info.struct_goods import PinDuoDuoGoodsSummaryInfo
 
 # Create your views here.
 @csrf_exempt
-def monitoring_pinduoduo_goods_by_url(request):
+def request_pinduoduo_goods_by_url(request):
     """
-    监控拼多多某个商品链接
+    请求拼多多某个商品链接,通过输入商品链接获取商品信息，
+    如商铺名，商品标题，售卖数，商品标签信息，商品款式及价格，商品特征和商品价格变化情况；
     方法：POST，参数
-    url：监控链接
-    monitoring_state:是否长期监控，1时0不是
+    url：需要提取信息的链接
     :param request:
     :return:
     """
     task_id = None
     if request.method == "POST":
-        url = request.POST.get("url")  # 监控链接
-        monitoring_state = request.POST.get("monitoring_state")  # 是否长期监控
+        url = request.POST.get("url")  # 需要提取信息的链接
         pin_duo_duo = PinDuoDuo()
         task_id = pin_duo_duo.get_goods_all_info_by_url.apply_async(args=(pin_duo_duo, url))
     return HttpResponse(str(task_id))
@@ -28,7 +27,8 @@ def monitoring_pinduoduo_goods_by_url(request):
 
 def get_monitoring_pinduoduo_goods_info(request):
     """
-    获取拼多多商品监控信息
+    获取拼多多商品信息,如商铺名，
+    商品标题，售卖数，商品标签信息，商品款式及价格，商品特征和商品价格变化情况；
     方法：GET，参数
     task_id：任务id
     :param request:
@@ -80,3 +80,17 @@ def get_monitoring_pinduoduo_goods_info(request):
                 "characteristics": goods_characteristics_list
             }
     return JsonResponse(task_result)
+
+
+def monitoring_pinduoduo_goods(request):
+    """
+    待定
+    :param request:
+    :return:
+    """
+    company_name = request.POST.get("company")  # 公司
+    shops_name = request.POST.get("shops_name")  # 店铺名
+    shops_url = request.POST.get("shops_url")  # 店铺链接
+
+    monitoring_state = request.POST.get("monitoring_state")  # 是否长期监控
+    return HttpResponse("ok")
