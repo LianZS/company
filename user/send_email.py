@@ -20,6 +20,6 @@ def send_email(EmailMultiAlternatives, from_emial, to_email, subject, message, h
     msg.attach_alternative(html_content, "text/html")
     try:
         msg.send()
-        cache.set(to_email, verification_code)
+        cache.set(to_email, verification_code,2*60*60)
     except smtplib.SMTPDataError as e:
         print(e)
