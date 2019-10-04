@@ -1,6 +1,34 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
-class LoginForm(forms.Form):
-    user_name = forms.CharField(label="帐户名", max_length=100)
-    user_password = forms.CharField(label="密码", max_length=100,widget=forms.PasswordInput)
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            "username": forms.TextInput(
+                attrs={"class": "text", "style": "background-color: transparent", "value": "账号",
+                       "onfocus": "this.value=''"}),
+            "password": forms.PasswordInput(
+                attrs={"class": "password", "style": "background-color: transparent", "value": "密码",
+                       "onfocus": "this.value=''"}),
+        }
+        labels = {
+            "username": '',
+            "password": ''
+        }
+        # error_messages = {
+        #     "username": {
+        #         "max_length": "This writer's name is too long",
+        #
+        #     },
+        #     "password": {
+        #         "max_length": "This writer's name is too long",
+        #
+        #     }
+        # }
+        help_texts = {
+            "username": '',
+            "password": ''
+        }
