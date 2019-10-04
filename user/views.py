@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
-from .forms import LoginForm
+from .forms import LoginForm,RegisterForm
 from django.contrib.auth.models import User
 
 
@@ -56,5 +56,5 @@ def registered_view(request):
 
         return HttpResponse("ok")
     else:
-        form = LoginForm()
-    return render(request, "login.html", {"form": form})
+        form = RegisterForm()
+    return render(request, "register.html", {"form": form})
