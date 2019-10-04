@@ -118,19 +118,110 @@
             </ol>
 
         </div>
+
         <div>
+            <div class="pos_base_info">
+                <label for="id_title">招聘标题:</label>
+
+                <input type="text"
+                       name="title"
+                       maxlength="100"
+                       required=""
+                       placeholder="工种"
+                       id="id_title"
+                       style="background-color: white;width: auto;">
+                <label for="id_title">薪资范围:</label>
+
+                <input type="number" name="low_remuneration" required=""
+                       style="width: auto;background-color: white" placeholder="最低报酬"
+                       id="id_low_remuneration">---<input type="number"
+                                                          name="high_remuneration" required=""
+                                                          placeholder="最高报酬"
+                                                          style="width: auto;background-color: white"
+                                                          id="id_high_remuneration">
+                <span class="font18">元/月</span>
+                <div>
+                    <label for="id_recruit_num">招收人数:</label>
+                    <input type="number" name="recruit_num" required="" style="width: auto;background-color: white"
+                           id="id_recruit_num">
+                    <label for="id_experience">经验要求:</label>
+                    <select name="experience" required="" id="id_experience"
+                            style="width: auto;background-color: white;display:inline">
+
+                        <option value="L" selected>经验不限</option>
+
+                        <option value="H">有类似工作经验</option>
+
+                    </select>
+                    <label for="id_record_schooling">学历要求:</label>
+                    <select name="record_schooling" required="" id="id_record_schooling"
+                            style="width: auto;background-color: white;display:inline">
+
+                        <option value="L" selected="selected">学历不限</option>
+
+                        <option value="M">中专及以上学历</option>
+
+                        <option value="D">大专及以上学历</option>
+
+                        <option value="C">本科及以上学历</option>
+
+                    </select>
+                </div>
+                <div>
+                    <label for="id_position_describe">岗位职责:</label>
+                    <br>
+                    <textarea name="position_describe" cols="40"
+                              rows="10"
+                              maxlength="3000" required=""
+                              id="id_position_describe" style="width: 80%;background-color: white;min-height:20em">
+
+                    </textarea>
+                </div>
+                <div>
+                    <label for="id_job_specification">任职要求:</label>
+                    <br>
+                    <textarea name="job_specification" cols="40"
+                              rows="10"
+                              maxlength="3000" required=""
+                              id="id_job_specification"
+                              style="width: 80%;background-color: white;min-height:20em"></textarea>
+                </div>
+                <div>
+                    <label for="id_salary_specification">工资薪资:</label>
+                    <br>
+                    <textarea name="salary_specification" cols="40"
+                              rows="10" maxlength="2000" required=""
+                              id="id_salary_specification"
+                              style="width: 80%;background-color: white;min-height:20em"></textarea>
+                </div>
+                <div>
+                    <label for="id_welfare_treatment">福利待遇:</label>
+                    <br>
+                    <textarea name="welfare_treatment" cols="40"
+                              rows="10"
+                              maxlength="2000" required=""
+                              id="id_welfare_treatment"
+                              style="width: 80%;background-color: white;min-height:20em"></textarea>
+                </div>
+                <div>
+                    <label for="id_contact_phone">联系方式:</label><input type="text" name="contact_phone" maxlength="11"
+                                                                      style="width: auto;background-color: white;"
+                                                                      required="" id="id_contact_phone">
+                    <label for="id_work_address">工作地点:</label>
+                    <input type="text" name="work_address" maxlength="32" required=""
+                           style="width: auto;background-color: white;" id="id_work_address">
+                </div>
+            </div>
 
         </div>
-
     </div>
-</div>
-<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/materialize.min.js' %}"></script>
-<script src="{% static 'js/jquery.metisMenu.js' %}"></script>
-<script src="{% static 'js/easypiechart.js' %}"></script>
-<script src="{% static 'js/easypiechart-data.js' %}"></script>
-<script src="{% static 'js/custom-scripts.js' %}"></script>
+    <script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/jquery.metisMenu.js' %}"></script>
+    <script src="{% static 'js/easypiechart.js' %}"></script>
+    <script src="{% static 'js/easypiechart-data.js' %}"></script>
+    <script src="{% static 'js/custom-scripts.js' %}"></script>
 
 
 </body>
