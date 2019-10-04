@@ -53,3 +53,28 @@ class RegisterForm(forms.ModelForm):
             "password": '',
             "email": ''
         }
+
+
+class ModifyForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+        widgets = {
+
+            "password": forms.PasswordInput(
+                attrs={"class": "password", "style": "background-color: transparent", "placeholder": "密码",
+                       "onfocus": "this.value=''"}),
+            "email": forms.EmailInput(
+                attrs={"class": "email", "style": "background-color: transparent", "placeholder": "邮箱"}),
+
+        }
+        labels = {
+            "password": '',
+            "email": '',
+
+        }
+
+        help_texts = {
+            "password": '',
+            "email": ''
+        }
