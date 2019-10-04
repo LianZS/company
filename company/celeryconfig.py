@@ -11,16 +11,17 @@ CELERY_IMPORTS = ("monitoring.monitoring_goods",)
 # 生成任务队列
 CELERY_QUEUES = (
     Queue('PinDuoDuo', routing_key='monitoring.monitoring_goods.#', exchange=Exchange('PinDuoDuo', type='direct')),
-
+    Queue('Email', routing_key='user.send_email.#', exchange=Exchange('Email', type='direct')),
 )
 # 任务路由器
 CELERY_ROUTES = {
     "monitoring.tasmonitoring_goodsks.#": {'queue': "PinDuoDuo"},
+    "user.send_email.#": {'queue': 'Email'},
 
 }
 CELERYD_CONCURRENCY = 10  # 设置并发的worker数量
 
-CELERYD_MAX_TASKS_PER_CHILD = 1  # 每个worker最多执行1个任务被销毁，可以防止内存泄漏
+CELERYD_MAX_TASKS_PER_CHILD = 2  # 每个worker最多执行1个任务被销毁，可以防止内存泄漏
 CELERY_TASK_ACKS_LATE = True  # 允许重试
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_ACCEPT_CONTENT = ['application/x-python-serialize']
