@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'monitoring.apps.MonitoringConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -68,13 +69,22 @@ TEMPLATES = [
         },
     },
 ]
+MEDIA_URL = '/user/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user')
 WSGI_APPLICATION = 'company.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'publiccomany@163.com'
+EMAIL_HOST_PASSWORD = 'lian1998'
+DEFAULT_FROM_EMAIL = 'publiccomany@163.com'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -122,7 +132,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
