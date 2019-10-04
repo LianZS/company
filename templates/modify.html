@@ -17,7 +17,13 @@
 
 </head>
 <body background="{% static 'img/bg1.jpg' %}">
-
+<script>
+    function Verification() {
+        email = $('.email').val();
+        $.post('sendVerificationCode', {"email": email});
+        $(".verification_button").val("已发送");
+    }
+</script>
 <div class="login-form">
     <div class="head-info">
         <label class="lbl-1"> </label>
@@ -34,8 +40,8 @@
 
         {{ form.email }}
         <div class="verification_code" style="width: 70%;">
-            <input type="text" style="width: 50%;background: transparent" placeholder="验证码">
-            <input type="button" value="发送验证码" onclick=""
+            <input type="text" style="width: 50%;background: transparent" name="verification" placeholder="验证码">
+            <input type="button" value="发送验证码" onclick="Verification()" class="verification_button"
                    style="width: 25%;float: right;background-color: #3ea751;color: white;text-align: left;padding-left: 2em">
         </div>
 
