@@ -32,9 +32,12 @@
         {{ form.username }}
         {{ form.password }}
         {{ form.password }}
-        {{ form.email }}<input type="button" value="发送验证码" onclick="">
-
-
+        {{ form.email }}
+        <div class="verification_code" style="width: 70%;">
+            <input type="text" style="width: 50%;background: transparent" placeholder="验证码">
+            <input type="button" value="发送验证码" onclick=""
+                   style="width: 25%;float: right;background-color: #3ea751;color: white;text-align: left;padding-left: 2em">
+        </div>
 
 
         <input type="submit" value="注册" id="send">
