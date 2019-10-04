@@ -27,7 +27,7 @@
     <div class="avtar">
         <img src="{% static 'img/user.png' %}"/>
     </div>
-    <form method="post" action="http://127.0.0.1:8000/user/login">
+    <form method="post" action="register">
         {% csrf_token %}
         {{ form.username }}
         {{ form.password }}
