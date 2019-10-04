@@ -23,7 +23,8 @@ class Recruitment(models.Model):
     job_specification = models.TextField(max_length=3000, db_column="specification", verbose_name="任职要求")
     salary_specification = models.TextField(max_length=2000, db_column="salary_specification", verbose_name="工资薪资")
     welfare_treatment = models.TextField(max_length=2000, db_column="welfare_treatment", verbose_name="福利待遇")
-    contact_phone = models.CharField(max_length=12, db_column='contact_phone', verbose_name="联系方式")
+    contact_phone = models.CharField(max_length=11, db_column='contact_phone', verbose_name="联系方式")
+    work_address = models.CharField(max_length=32, db_column="address", verbose_name="公众地点")
 
     class Meta:
         db_table = "recruitment"
