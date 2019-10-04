@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh" data-hairline="true" data-theme="light">
+<head>
+    {% load static %}
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"/>
+
+    <title>修改密码</title>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css'/>
+    <link href='#css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='#css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+</head>
+<body background="{% static 'img/bg1.jpg' %}">
+
+<div class="login-form">
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="avtar">
+        <img src="{% static 'img/user.png' %}"/>
+    </div>
+    <form method="post" action="modify">
+        {% csrf_token %}
+        {{ form.password }}
+        {{ form.password }}
+
+        {{ form.email }}
+        <div class="verification_code" style="width: 70%;">
+            <input type="text" style="width: 50%;background: transparent" placeholder="验证码">
+            <input type="button" value="发送验证码" onclick=""
+                   style="width: 25%;float: right;background-color: #3ea751;color: white;text-align: left;padding-left: 2em">
+        </div>
+
+        <input type="submit" value="提交" id="send">
+
+
+    </form>
+
+</div>
+</body>
+
+</html>
