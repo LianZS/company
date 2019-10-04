@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Recruitment
 
 
 class LoginForm(forms.ModelForm):
@@ -78,3 +79,9 @@ class ModifyForm(forms.ModelForm):
             "password": '',
             "email": ''
         }
+
+
+class RecruitmentForm(forms.ModelForm):
+    class Meta:
+        model = Recruitment
+        fields = '__all__'
