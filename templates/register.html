@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" data-hairline="true" data-theme="light">
+<head>
+    {% load static %}
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"/>
+
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css'/>
+    <link href='#css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='#css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+</head>
+<body background="{% static 'img/bg1.jpg' %}">
+
+<div class="login-form">
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="avtar">
+        <img src="{% static 'img/user.png' %}"/>
+    </div>
+    <form method="post" action="http://127.0.0.1:8000/user/login">
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+        {{ form.password }}
+        {{ form.email }}<input type="button" value="发送验证码" onclick="">
+
+
+
+
+        <input type="submit" value="注册" id="send">
+
+    </form>
+
+</div>
+</body>
+
+</html>
