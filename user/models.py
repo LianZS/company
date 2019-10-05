@@ -1,4 +1,5 @@
 import uuid
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -11,6 +12,9 @@ class UserProfile(models.Model):
 
 
 class Recruitment(models.Model):
+    """
+    招聘信息表
+    """
     RECORD_CHOICE = [('L', '学历不限'), ('M', '中专及以上学历'), ('D', '大专及以上学历'), ('C', '本科及以上学历')]
     EXPERIENCE_CHOICE = [('L', '经验不限'), ('H', '有类似工作经验')]
     GENDER_CHOICE = [('M', '男'), ('L', '女')]
@@ -29,6 +33,13 @@ class Recruitment(models.Model):
     welfare_treatment = models.TextField(max_length=2000, db_column="welfare_treatment", verbose_name="福利待遇")
     contact_phone = models.CharField(max_length=11, db_column='contact_phone', verbose_name="联系方式")
     work_address = models.CharField(max_length=32, db_column="address", verbose_name="公众地点")
+    release_time = models.DateField(db_column="release_time", default=datetime.datetime.now().date(),
+                                    verbose_name="发布时间")
+    create_time = models.DateTimeField(db_column="create_time", verbose_name="数据创建时间", default=datetime.datetime.now())
 
     class Meta:
         db_table = "recruitment"
+
+
+class ApplicantModel(models.Model):
+    pass
