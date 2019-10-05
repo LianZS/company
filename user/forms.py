@@ -84,4 +84,4 @@ class ModifyForm(forms.ModelForm):
 class RecruitmentForm(forms.ModelForm):
     class Meta:
         model = Recruitment
-        fields = '__all__'
+        exclude=['release_time']
