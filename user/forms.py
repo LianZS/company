@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Recruitment
+from .models import Recruitment, ApplicantModel
 
 
 class LoginForm(forms.ModelForm):
@@ -85,3 +85,9 @@ class RecruitmentForm(forms.ModelForm):
     class Meta:
         model = Recruitment
         exclude = ['release_time', 'create_time']
+
+
+class AppliactionForm(forms.ModelForm):
+    class Meta:
+        model = ApplicantModel
+        exclude = ["uid"]
