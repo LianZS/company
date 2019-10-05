@@ -84,4 +84,4 @@ class ModifyForm(forms.ModelForm):
 class RecruitmentForm(forms.ModelForm):
     class Meta:
         model = Recruitment
-        exclude=['release_time']
+        exclude = ['release_time', 'create_time']
