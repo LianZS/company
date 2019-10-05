@@ -42,4 +42,19 @@ class Recruitment(models.Model):
 
 
 class ApplicantModel(models.Model):
-    pass
+    GENDER_CHOICE = [('M', '男'), ('L', '女')]
+    RECORD_CHOICE = [('A', '小学'), ('B', '初中'), ('C', '中专'), ('D', '大专'), ('E', "本科"), ('F', "研究生")]
+
+    uid = models.OneToOneField(Recruitment, to_field="id", on_delete=models.CASCADE)
+    name = models.CharField(max_length=16, db_column="name", verbose_name="姓名")
+    gender = models.CharField(max_length=2, db_column="gender", choices=GENDER_CHOICE, verbose_name="性别")
+    age = models.SmallIntegerField(db_column="age", verbose_name="年龄")
+    record_schooling = models.CharField(max_length=1, db_column="record_schooling", choices=RECORD_CHOICE,
+                                        verbose_name="学历")
+    contact_phone = models.CharField(max_length=11, db_column='contact_phone', verbose_name="联系方式")
+    native_place = models.CharField(max_length=32, db_column="native_place", verbose_name="籍贯")
+    experience = models.TextField(max_length=360, db_column="experience", verbose_name="工作经验")
+    talent = models.TextField(max_length=360, db_column="talent", verbose_name="特长", null=True)
+
+    class Meta:
+        db_table = "application"
