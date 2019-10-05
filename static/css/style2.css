@@ -277,3 +277,6 @@ DASHBOARD STYLES
     max-height: 350px;
     width: 100%;
 }
+ul li{
+    margin-top: 1em;
+}
