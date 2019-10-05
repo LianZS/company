@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -12,10 +13,13 @@ class UserProfile(models.Model):
 class Recruitment(models.Model):
     RECORD_CHOICE = [('L', '学历不限'), ('M', '中专及以上学历'), ('D', '大专及以上学历'), ('C', '本科及以上学历')]
     EXPERIENCE_CHOICE = [('L', '经验不限'), ('H', '有类似工作经验')]
+    GENDER_CHOICE = [('M', '男'), ('L', '女')]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100, db_column="title", verbose_name="招聘标题")
     low_remuneration = models.IntegerField(db_column='low_remuneration', verbose_name="最低报酬")
     high_remuneration = models.IntegerField(db_column='high_remuneration', verbose_name="最高报酬")
     recruit_num = models.IntegerField(db_column="recruit_num", verbose_name="招收人数")
+    gender = models.CharField(max_length=4, db_column="gender", choices=GENDER_CHOICE, verbose_name="性别要求")
     experience = models.CharField(max_length=32, db_column="experience", verbose_name="经验要求", choices=EXPERIENCE_CHOICE)
     record_schooling = models.CharField(max_length=32, db_column="record_schooling", verbose_name="学历要求",
                                         choices=RECORD_CHOICE)
