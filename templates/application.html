@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>招聘</title>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+
+
+</head>
+<body style="background-color:whitesmoke;">
+<header id="navigation" class="navbar-inverse navbar-fixed-top animated-header"
+        style=" background-color: rgba(232, 226, 226, 0.4);">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <h1 class="navbar-brand">
+                <a href="">品联优
+
+                </a>
+            </h1>
+        </div>
+
+
+        <nav class="collapse navbar-collapse navbar-right" role="navigation">
+            <ul id="nav" class="nav navbar-nav">
+                <li>
+                    <a href="" style="color: black">首页</a>
+                </li>
+                <li>
+                    <a href="" style="color: black">智慧景区</a>
+                </li>
+
+
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<br>
+
+<div class="content-wrapper">
+
+    <div class="container">
+
+
+        <div>
+
+        </div>
+
+        <div class="panel panel-success" style="margin-top: 3em">
+            <div class="panel-heading" style="background-color: white">
+                申请表
+            </div>
+            <div id="search-index">
+
+                <div>
+                    <div>
+                        <ul>
+                            <li>
+                                <label>应聘职位:</label>
+                                <span>{{ work_name }}</span>
+                            </li>
+                            <li>
+                                <label for="id_name">姓名:</label>
+                                <input type="text" name="name" maxlength="16" required=""
+                                       id="id_name">
+                            </li>
+                            <li>
+                                <label for="id_gender">性别:</label>
+                                <select name="gender" required="" id="id_gender">
+                                    <option value="M" selected>男</option>
+
+                                    <option value="L">女</option>
+
+                                </select>
+                            </li>
+                            <li>
+                                <label for="id_age">年龄:</label>
+                                <input type="number" min="16" name="age" required="" id="id_age">
+
+                            </li>
+                            <li>
+                                <label for="id_record_schooling">学历:</label>
+                                <select name="record_schooling" required="" id="id_record_schooling">
+
+                                    <option value="A">小学</option>
+
+                                    <option value="B">初中</option>
+
+                                    <option value="C">中专</option>
+
+                                    <option value="D">大专</option>
+
+                                    <option value="E" selected>本科</option>
+
+                                    <option value="F">研究生</option>
+
+                                </select>
+                            </li>
+                            <li>
+                                <label for="id_contact_phone">联系方式:</label>
+                                <input type="text" name="contact_phone"
+                                       maxlength="11" required=""
+                                       id="id_contact_phone">
+                            </li>
+                            <li>
+                                <label for="id_native_place">籍贯:</label>
+                                <input type="text" name="native_place" maxlength="32"
+                                       required="" id="id_native_place">
+                            </li>
+                            <li>
+                                <label for="id_experience">工作经验</label>
+                                <br>
+                                <textarea name="experience" cols="40" rows="10" maxlength="360" required=""
+                                          style="width: 70%;height: 130px"
+                                          id="id_experience"></textarea>
+                            </li>
+                            <li>
+                                <label for="id_talent">特长</label>
+                                <br>
+                                <textarea name="talent" cols="40" rows="10" maxlength="360" required=""
+                                          style="width: 70%;height: 100px"
+                                          id="id_talent"></textarea>
+                            </li>
+                            <li style="list-style: none">
+                                <form>
+                                    <input type="submit" value="提交"
+                                           style="background: #ff552e;color: white;width: 100px;margin-right: 10px;height: 54px;">
+                                </form>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
