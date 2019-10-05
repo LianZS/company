@@ -3,8 +3,8 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.http import JsonResponse, Http404
 from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
-from .forms import RecruitmentForm, LoginForm
-from .models import Recruitment
+from .forms import RecruitmentForm, LoginForm, AppliactionForm
+from .models import Recruitment, ApplicantModel
 
 
 @csrf_exempt
@@ -68,13 +68,19 @@ def recruitmentpage(request, uid):
     except ValidationError:
         raise Http404("Poll does not exist")
 
-    return render(request, 'recruitmentpage.html', {'recruitment_info': recruitment_info})
+    return render(request, 'recruitment_page.html', {'recruitment_info': recruitment_info})
 
 
-def apply(request, uid):
+def apply_view(request, uid):
     """
     申请职位界面
     :param request:
     :param uid:
     :return:
     """
+    form = AppliactionForm()
+    try:
+        work_name = Recruitment.objects.get(id=uid).title  # 岗位名称
+    except ValidationError:
+        raise Http404("Poll does not exist")
+    return render(request, "application.html", {"form": form, "work_name": work_name})
