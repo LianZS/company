@@ -24,7 +24,7 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect("/user/manager")
+            return HttpResponseRedirect("/pinlianyou/manager")
         else:
             status = "error"
 
@@ -42,7 +42,7 @@ def validation_user(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect("/user/manager")
+            return HttpResponseRedirect("/pinlianyou/manager")
         else:
             status = "error"
     else:
@@ -79,7 +79,7 @@ def registered_view(request):
             user = User.objects.create_user(username=username, password=password, email=email)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/user/manager')
+                return HttpResponseRedirect('/pinlianyou/manager')
         else:
             return HttpResponse('验证码有误')
 
@@ -151,4 +151,3 @@ def send_verification_view(request):
                          verification_code, cache)
 
     return HttpResponse("success")
-
