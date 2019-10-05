@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>招聘</title>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+
+</head>
+
+<body style="background-color:whitesmoke;">
+<header id="navigation" class="navbar-inverse navbar-fixed-top animated-header"
+        style=" background-color: rgba(232, 226, 226, 0.4);">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <h1 class="navbar-brand">
+                <a href="">品联优
+
+                </a>
+            </h1>
+        </div>
+
+
+        <nav class="collapse navbar-collapse navbar-right" role="navigation">
+            <ul id="nav" class="nav navbar-nav">
+                <li>
+                    <a href="" style="color: black">首页</a>
+                </li>
+                <li>
+                    <a href="" style="color: black">智慧景区</a>
+                </li>
+
+
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<br>
+
+<div class="content-wrapper">
+
+    <div class="container">
+
+
+        <div>
+
+        </div>
+
+        <div class="panel panel-success" style="margin-top: 3em">
+            <div class="panel-heading" style="background-color: white">
+
+            </div>
+            <div id="search-index">
+
+                <div>
+                    <h1 style="padding-left: 30px">普通技工</h1>
+                    <div>
+                        <ul style="padding: 50px;float: left">
+                            <li>
+                                <label>职位：</label>
+                                <span style="">普通技工</span>
+                            </li>
+                            <li>
+                                <label>薪资：</label>
+                                <span style=" ">3000-5000</span>
+                                <span style="position: relative;font-size: 10px;font-weight: 400; top: -2px;left: 0; margin-left: 8px;">元/月</span>
+                            </li>
+                            <li>
+                                <label>招收人数：</label>
+                                <span>20</span>
+                            </li>
+                            <li><label>学历要求：</label>
+                                <span>学历不限</span></li>
+                            <li><label>经验要求：</label>
+                                <span>经验不限,可接收应届生</span></li>
+                            <li>
+                                <label>工作地点：</label>
+                                <span>
+                                广州广州天河越秀白云荔湾黄埔皆可安排
+                            </span>
+                            </li>
+                            <li>
+                                <label>联系方式:</label>
+                                <span>15521294446</span>
+                            </li>
+
+                        </ul>
+                        <div style="position: relative;left: 100px">
+                            <img src="{% static 'img/user.png' %}" height="170px">
+                            <form method="get" action="apply" style="position: relative;top: 1px">
+                                <input type="submit" value="申请职位"
+                                       style="background: #ff552e;color: white;width: 200px;margin-right: 10px;height: 54px;">
+                            </form>
+                        </div>
+                    </div>
+                    <ul style="clear: left">
+                        <li>
+                            <h4>岗位职责
+                            </h4>
+                            <p>
+                                1. 负责所属区域的收派件工作
+                                2. 具备较强的客户沟通能力和客户开发能力；
+                            </p>
+                        </li>
+                        <li>
+                            <h4>任职要求</h4>
+                            <p>
+                                1、初中及以上学历（无工作经验入职有老员工带）
+                                2、工作时间：8-10小时/天；
+                                3、公司可配车，若自带面包车可提供油补；
+                            </p>
+                        </li>
+                        <li>
+                            <h4>工资薪资
+                            </h4>
+                            <p>
+                                1、工资：5000-8000元左右，月休4天，计件提成，多劳多得；
+                                2、社保、各类带薪休假（法定假日、年假、婚假、产假、陪产假等），提供高于同行业具有竞争力的薪资水平；
+                                3、入职满一年可享受每月“亲情1+1”，集体生日等；
+                                4、每年中秋节都会为每一位员工的家人寄去一份月饼礼品包；
+                                5、公司提供公平的晋升平台，入职半年即可去参加经理储备，储备通过即可任命经理等管理层岗位；
+                            </p>
+                        </li>
+                        <li>
+                            <h4>福利待遇
+                            </h4>
+                            <p>
+                                1、工资：5000-8000元左右，月休4天，计件提成，多劳多得；
+                                2、社保、各类带薪休假（法定假日、年假、婚假、产假、陪产假等），提供高于同行业具有竞争力的薪资水平；
+                                3、入职满一年可享受每月“亲情1+1”，集体生日等；
+                                4、每年中秋节都会为每一位员工的家人寄去一份月饼礼品包；
+                                5、公司提供公平的晋升平台，入职半年即可去参加经理储备，储备通过即可任命经理等管理层岗位；
+                            </p>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>
